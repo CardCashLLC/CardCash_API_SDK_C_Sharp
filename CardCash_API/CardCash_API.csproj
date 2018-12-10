@@ -3,6 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
+    <PackageId>cardcard_api_sdk</PackageId>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Authors>developers@cardcash.com</Authors>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/CardCashLLC/CardCash_API_SDK_C_Sharp</PackageProjectUrl>
+    <Description>CardCash Client Facing API SDK For Partners using C#
+</Description>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <Owners>CardCash</Owners>
+    <Summary>CardCash Client Facing API SDK For Partners using C#</Summary>
+    <Title>CardCash_API_SDK_C_Sharp</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -14,5 +25,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
 </Project>

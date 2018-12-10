@@ -20,8 +20,6 @@ namespace CardCash_API
         private CookieContainer _CardCashCookieJar;
         private HttpClientHandler _handler;
 
-        private HttpResponseMessage httpResponse = null;
-
         public API(string appID, Boolean isProduction = false, Boolean debug = false)
         {
             _debug = debug;
@@ -81,7 +79,7 @@ namespace CardCash_API
                 request.Content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
             }
 
-            httpResponse = await _Client.SendAsync(request);
+            HttpResponseMessage httpResponse = await _Client.SendAsync(request);
 
             var result = await httpResponse.Content.ReadAsStringAsync();
 
@@ -120,7 +118,7 @@ namespace CardCash_API
             return loginResponse;
         }
 
-        public async Task<dynamic> CustomerLogin(string firstName, string lastName, string email, string password)
+        public async Task<dynamic> CreateCustomer(string firstName, string lastName, string email, string password)
         {
             var createCustomer = (dynamic)new JObject();
             createCustomer.customer = (dynamic)new JObject();
@@ -132,6 +130,13 @@ namespace CardCash_API
             var createCustomerResponse = await Execute<dynamic>(HttpMethod.Post, "customers", createCustomer);
 
             return createCustomerResponse;
+        }
+
+        public async Task<dynamic> GetCustomer()
+        {
+            var getCustomerResponse = await Execute<dynamic>(HttpMethod.Get, "customers");
+
+            return getCustomerResponse;
         }
 
         public async Task<dynamic> GetMerchants()
