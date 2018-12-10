@@ -68,12 +68,12 @@ namespace CardCash_API
 
             request.Headers.Add("x-cc-app", _appID);
 
-            if (jsonObject != null && HttpMethod.Post == method)
+            if (jsonObject != null && (HttpMethod.Post == method || HttpMethod.Put == method))
             {
                 if (_debug)
                 {
                     Console.WriteLine("Request Details: " + request);
-                    Console.WriteLine("Post Data " + jsonObject.ToString());
+                    Console.WriteLine("Data " + jsonObject.ToString());
                 }
 
                 request.Content = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
@@ -207,11 +207,6 @@ namespace CardCash_API
                 updateCardObj.card.refId = refID;
             }
 
-            if (refID != null)
-            {
-                updateCardObj.card.refId = refID;
-            }
-
             if (cardValue != 0)
             {
                 updateCardObj.card.enterValue = cardValue;
@@ -227,7 +222,7 @@ namespace CardCash_API
                 updateCardObj.card.pin = cardPin;
             }
 
-            var updateCardResponse = await Execute<dynamic>(HttpMethod.Post, "carts/" + cartID + "/cards/" + cardID, updateCardObj);
+            var updateCardResponse = await Execute<dynamic>(HttpMethod.Put, "carts/" + cartID + "/cards/" + cardID, updateCardObj);
 
             return updateCardResponse;
         }
